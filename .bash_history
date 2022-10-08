@@ -40,3 +40,6 @@ clear
 php artisan test
 php artisan test --stop-on-failure
 clear
+php artisan make:model Category -m
+clear
+php artisan migrate
