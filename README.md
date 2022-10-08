@@ -75,3 +75,13 @@ The Laravel framework is open-sourced software licensed under the [MIT license](
     composer create-project --prefer-dist laravel/laravel tmp
     mv -f tmp/* tmp/.* .
     composer install
+
+Após alterar o composer.json para mapear a pasta src/Core na PS-4, rodar o comando abaixo
+
+    docker-compose exec app bash
+    composer dump-autoload
+
+Instalando o Mockery
+
+    docker-compose exec app bash
+    composer require --dev mockery/mockery

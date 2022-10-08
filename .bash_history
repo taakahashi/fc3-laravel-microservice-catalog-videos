@@ -30,3 +30,13 @@ ls -la
 clear
 composer install
 clear
+clear
+composer require --dev mockery/mockery
+clear
+clear
+./vendor/bin/phpunit
+./vendor/bin/phpunit
+clear
+php artisan test
+php artisan test --stop-on-failure
+clear
