@@ -3,7 +3,6 @@
 namespace Core\Domain\Repository;
 
 use Core\Domain\Entity\Category;
-use Core\UseCase\DTO\Category\PaginationInterface;
 
 interface CategoryRepositoryInterface
 {
@@ -19,5 +18,4 @@ interface CategoryRepositoryInterface
 
     public function paginate(string $filter = '', $order = 'DESC', int $page = 1, int $totalPage = 15): PaginationInterface;
 
-    public function toCategory(object $data): Category;
 }

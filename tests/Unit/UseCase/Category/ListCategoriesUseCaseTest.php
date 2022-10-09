@@ -2,7 +2,6 @@
 
 namespace Unit\UseCase\Category;
 
-use Core\UseCase\DTO\Category\PaginationInterface;
 use stdClass;
 use Mockery;
 use PHPUnit\Framework\TestCase;
@@ -10,6 +9,7 @@ use Core\UseCase\Category\ListCategoriesUseCase;
 use Core\Domain\Repository\CategoryRepositoryInterface;
 use Core\UseCase\DTO\Category\ListCategories\ListCategoriesInputDTO;
 use Core\UseCase\DTO\Category\ListCategories\ListCategoriesOutputDTO;
+use Core\Domain\Repository\PaginationInterface;
 
 
 class ListCategoriesUseCaseTest extends TestCase

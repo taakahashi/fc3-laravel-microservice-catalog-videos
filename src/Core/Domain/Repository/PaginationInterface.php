@@ -1,6 +1,6 @@
 <?php
 
-namespace Core\UseCase\DTO\Category;
+namespace Core\Domain\Repository;
 
 use stdClass;
 
