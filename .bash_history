@@ -77,3 +77,16 @@ php artisan test --stop-on-failure
 clear
 php artisan test --stop-on-failure
 php artisan test
+clear
+php artisan serve
+clear
+php artisan test
+clear
+php artisan make:factory CategoryFactory
+clear
+php artisan test
+clear
+php artisan serve
+clear
+php artisan test
+clear
