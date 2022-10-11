@@ -43,3 +43,37 @@ clear
 php artisan make:model Category -m
 clear
 php artisan migrate
+clear
+php artisan test
+clear
+php artisan test
+clear
+php artisan make:test App\\Repositories\\Eloquent\\CategoryRepositoryEloquent 
+php artisan make:test App\\Repositories\\Eloquent\\CategoryRepositoryEloquent 
+clear
+php artisan test
+clear
+php artisan test
+clear
+php artisan test
+clear
+php artisan test
+
+php artisan test
+php artisan test --stop-on-failure
+clear
+php artisan test --stop-on-failure
+php artisan test --stop-on-failure
+php artisan test --stop-on-failure
+php artisan test --stop-on-failure
+php artisan test --stop-on-failure
+php artisan test --stop-on-failure
+php artisan test --stop-on-failure
+php artisan test --stop-on-failure
+clear
+php artisan test --stop-on-failure
+php artisan test --stop-on-failure
+php artisan test --stop-on-failure
+clear
+php artisan test --stop-on-failure
+php artisan test

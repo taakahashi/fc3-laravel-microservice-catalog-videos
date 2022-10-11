@@ -21,7 +21,7 @@ trait MethodsMagicsTrait
 
     public function id(): string
     {
-        return (string) $this->id();
+        return (string) $this->id;
     }
 
     public function createdAt(): string
