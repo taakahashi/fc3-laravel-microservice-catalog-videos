@@ -90,3 +90,33 @@ php artisan serve
 clear
 php artisan test
 clear
+unit
+echo 123
+clear
+echo "alias unit='$(pwd)/vendor/bin/phpunit'" >> ~/.bashrc
+unit
+sh ~/.profile
+clear
+source ~/.bashrc
+unit
+clear
+unit
+clear
+nano ~/.bashrc
+cat ~/.bashrc
+clear
+clear
+php artisan test
+php artisan test
+clear
+php artisan test
+clear
+php artisan test
+php artisan test
+php artisan test
+php artisan test
+php artisan test
+php artisan test
+php artisan test
+php artisan test
+php artisan test

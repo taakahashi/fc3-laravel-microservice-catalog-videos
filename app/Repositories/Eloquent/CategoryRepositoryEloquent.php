@@ -2,6 +2,7 @@
 
 namespace App\Repositories\Eloquent;
 
+use App\Models\Category;
 use App\Models\Category as ModelCategory;
 use Core\Domain\Entity\Category as EntityCategory;
 use Core\Domain\Repository\PaginationInterface;
@@ -57,14 +58,24 @@ class CategoryRepositoryEloquent implements CategoryRepositoryInterface
 
     public function findAll(string $filter = '', $order = 'DESC'): array
     {
-        return [];
+        /** @var Category $categories */
+        $categories = $this->modelCategory
+            ->where(
+                function ($query) use ($filter) {
+                    if ($filter) {
+                        $query->where('name', 'LIKE', "%{$filter}%");
+                    }
+                })
+            ->orderBy('id', $order)
+            ->get();
+
+        return $categories->toArray();
     }
 
     public function paginate(string $filter = '', $order = 'DESC', int $page = 1, int $totalPage = 15): PaginationInterface
     {
         return new PaginationPresenter();
     }
-
 
     private function toCategory(Object $object): EntityCategory
     {

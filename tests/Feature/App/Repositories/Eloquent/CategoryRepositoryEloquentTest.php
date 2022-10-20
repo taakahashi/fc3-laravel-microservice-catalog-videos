@@ -49,6 +49,15 @@ class CategoryRepositoryEloquentTest extends TestCase
     {
         $this->expectException(NotFoundException::class);
 
-        $response = $this->repository->findById('fake');
+        $this->repository->findById('fake');
     }
+
+    public function testFindAll()
+    {
+        $categories = ModelCategory::factory()->count(10)->create();
+        $response = $this->repository->findAll();
+
+        self::assertCount(count($categories), $response);
+    }
+
 }
