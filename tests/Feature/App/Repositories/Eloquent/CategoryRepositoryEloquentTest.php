@@ -2,6 +2,7 @@
 
 namespace Tests\Feature\App\Repositories\Eloquent;
 
+use Core\Domain\Repository\PaginationInterface;
 use Tests\TestCase;
 use App\Models\Category as ModelCategory;
 use Core\Domain\Entity\Category as EntityCategory;
@@ -60,4 +61,22 @@ class CategoryRepositoryEloquentTest extends TestCase
         self::assertCount(count($categories), $response);
     }
 
+    public function testPaginate()
+    {
+        ModelCategory::factory()->count(20)->create();
+        $response = $this->repository->paginate();
+
+        self::assertInstanceOf(PaginationInterface::class, $response);
+        self::assertEquals(20, $response->total());
+        self::assertCount(15, $response->items());
+    }
+
+    public function testPaginateWithoutData()
+    {
+        $response = $this->repository->paginate();
+
+        self::assertInstanceOf(PaginationInterface::class, $response);
+        self::assertEquals(0, $response->total());
+        self::assertCount(0, $response->items());
+    }
 }
