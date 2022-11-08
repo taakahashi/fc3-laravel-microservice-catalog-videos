@@ -10,13 +10,5 @@ php artisan migrate
 php artisan make:test App\\Repositories\\Eloquent\\CategoryRepositoryEloquent
 php artisan make:factory CategoryFactory
 php artisan test
-php artisan test
 clear
-clear
-php artisan test
-php artisan test
-php artisan test
-php artisan test
-php artisan test
-php artisan test
-php artisan test
+
