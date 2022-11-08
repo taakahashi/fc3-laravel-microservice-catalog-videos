@@ -79,4 +79,31 @@ class CategoryRepositoryEloquentTest extends TestCase
         self::assertEquals(0, $response->total());
         self::assertCount(0, $response->items());
     }
+
+    public function testUpdateIdNotFound()
+    {
+        self::expectException(NotFoundException::class);
+
+        $category = new EntityCategory(
+            name: 'Test'
+        );
+
+        $this->repository->update($category);
+    }
+
+    public function testUpdate()
+    {
+        $categoryDB = ModelCategory::factory()->create();
+
+        $category = new EntityCategory(
+            id: $categoryDB->id,
+            name: 'Updated Name'
+        );
+
+        $response = $this->repository->update($category);
+
+        self::assertInstanceOf(EntityCategory::class, $response);
+        self::assertNotEquals($response->name, $categoryDB->name);
+        self::assertEquals('Updated Name', $response->name);
+    }
 }
