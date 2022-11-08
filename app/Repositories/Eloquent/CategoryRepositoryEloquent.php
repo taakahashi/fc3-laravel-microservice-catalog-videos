@@ -51,7 +51,11 @@ class CategoryRepositoryEloquent implements CategoryRepositoryInterface
 
     public function delete(string $id): bool
     {
-        return true;
+        if (!$categoryDB = $this->modelCategory->find($id)) {
+            throw new NotFoundException('Category Not Found');
+        }
+
+        return $categoryDB->delete();
     }
 
     public function findById(string $id): EntityCategory
@@ -63,12 +67,10 @@ class CategoryRepositoryEloquent implements CategoryRepositoryInterface
         }
 
         return $this->toCategory($category);
-
     }
 
     public function findAll(string $filter = '', $order = 'DESC'): array
     {
-        /** @var Category $categories */
         $categories = $this->modelCategory
             ->where(
                 function ($query) use ($filter) {
