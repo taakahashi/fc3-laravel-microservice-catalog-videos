@@ -10,5 +10,4 @@ php artisan migrate
 php artisan make:test App\\Repositories\\Eloquent\\CategoryRepositoryEloquent
 php artisan make:factory CategoryFactory
 php artisan test
-clear
-
+php artisan make:test Core\\UseCase\\Category\\CreateCategoryUseCaseTest
