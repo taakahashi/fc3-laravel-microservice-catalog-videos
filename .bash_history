@@ -12,3 +12,4 @@ php artisan make:factory CategoryFactory
 php artisan test
 php artisan make:test Core\\UseCase\\Category\\CreateCategoryUseCaseTest
 php artisan make:test Core\\UseCase\\Category\\DeleteCategoryUseCaseTest
+php artisan make:test Core\\UseCase\\Category\\ListCategoriesUseCaseTest
