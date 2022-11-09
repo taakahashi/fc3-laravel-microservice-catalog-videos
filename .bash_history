@@ -14,3 +14,4 @@ php artisan make:test Core\\UseCase\\Category\\CreateCategoryUseCaseTest
 php artisan make:test Core\\UseCase\\Category\\DeleteCategoryUseCaseTest
 php artisan make:test Core\\UseCase\\Category\\ListCategoriesUseCaseTest
 php artisan make:test Core\\UseCase\\Category\\ListCategoryUseCaseTest
+php artisan make:test Core\\UseCase\\Category\\UpdateCategoryUseCaseTest
