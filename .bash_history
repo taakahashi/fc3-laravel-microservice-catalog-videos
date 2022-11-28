@@ -15,3 +15,6 @@ php artisan make:test Core\\UseCase\\Category\\DeleteCategoryUseCaseTest
 php artisan make:test Core\\UseCase\\Category\\ListCategoriesUseCaseTest
 php artisan make:test Core\\UseCase\\Category\\ListCategoryUseCaseTest
 php artisan make:test Core\\UseCase\\Category\\UpdateCategoryUseCaseTest
+php artisan make:test App\\Http\\Controllers\\Api\\CategoryControllerTest
+php artisan make:controller Api\\CategoryController
+php artisan make:resource CategoryResource
