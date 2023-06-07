@@ -85,3 +85,9 @@ Instalando o Mockery
 
     docker-compose exec app bash
     composer require --dev mockery/mockery
+
+MySQL
+    docker-compose exec db bash
+    mysql -u root -p code_micro_videos
+    show tables;
+    desc categories;

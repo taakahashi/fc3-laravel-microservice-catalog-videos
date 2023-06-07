@@ -3,39 +3,32 @@
 namespace Tests\Feature\App\Http\Controllers\Api;
 
 use App\Http\Controllers\Api\CategoryController;
+use App\Models\Category;
+use App\Repositories\Eloquent\CategoryRepositoryEloquent;
 use Core\UseCase\Category\ListCategoriesUseCase;
-use Core\UseCase\DTO\Category\ListCategories\ListCategoriesOutputDTO;
 use Illuminate\Http\Request;
-use Mockery;
+use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 use Tests\TestCase;
 
 class CategoryControllerTest extends TestCase
 {
+    protected $repository;
+
+    protected function setUp(): void
+    {
+        $this->repository = new CategoryRepositoryEloquent(new Category());
+
+        parent::setUp();
+    }
+
     public function testIndex()
     {
-        $mockRequest = Mockery::mock(Request::class);
-        $mockRequest->shouldReceive('get')->andReturn('test');
-
-        $mockOutputDTO = Mockery::mock(ListCategoriesOutputDTO::class, [
-            [], 1, 1, 1, 1, 1, 1, 1
-        ]);
-
-        $mockUseCase = Mockery::mock(ListCategoriesUseCase::class);
-        $mockUseCase->shouldReceive('execute')->andReturn($mockOutputDTO);
+        $useCase = new ListCategoriesUseCase($this->repository);
 
         $controller = new CategoryController();
-        $response = $controller->index($mockRequest, $mockUseCase);
+        $response = $controller->index(new Request(), $useCase);
 
-        static::assertIsObject($response->resource);
-        static::assertArrayHasKey('meta', $response->additional);
-
-        //Spies
-        $mockUseCase = Mockery::spy(ListCategoriesUseCase::class);
-        $mockUseCase->shouldReceive('execute')->andReturn($mockOutputDTO);
-
-        $controller->index($mockRequest, $mockUseCase);
-
-        $mockUseCase->shouldHaveReceived('execute');
-        //Spies
+        $this->assertInstanceOf(AnonymousResourceCollection::class, $response);
+        $this->assertArrayHasKey('meta', $response->additional);
     }
 }

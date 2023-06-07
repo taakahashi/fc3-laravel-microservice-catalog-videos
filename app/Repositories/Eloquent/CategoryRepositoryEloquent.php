@@ -2,13 +2,12 @@
 
 namespace App\Repositories\Eloquent;
 
-use App\Models\Category;
 use App\Models\Category as ModelCategory;
-use Core\Domain\Entity\Category as EntityCategory;
-use Core\Domain\Repository\PaginationInterface;
-use Core\Domain\Repository\CategoryRepositoryInterface;
 use App\Repositories\Presenters\PaginationPresenter;
+use Core\Domain\Entity\Category as EntityCategory;
 use Core\Domain\Exception\NotFoundException;
+use Core\Domain\Repository\CategoryRepositoryInterface;
+use Core\Domain\Repository\PaginationInterface;
 
 class CategoryRepositoryEloquent implements CategoryRepositoryInterface
 {

@@ -3,22 +3,25 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\StoreCategoryRequest;
 use App\Http\Resources\CategoryResource;
+use Core\UseCase\Category\CreateCategoryUseCase;
 use Core\UseCase\Category\ListCategoriesUseCase;
+use Core\UseCase\DTO\Category\CreateCategory\CategoryCreateInputDTO;
 use Core\UseCase\DTO\Category\ListCategories\ListCategoriesInputDTO;
 use Illuminate\Http\Request;
-use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
+use Illuminate\Http\Response;
 
 class CategoryController extends Controller
 {
-    public function index(Request $request, ListCategoriesUseCase $useCase): AnonymousResourceCollection
+    public function index(Request $request, ListCategoriesUseCase $useCase)
     {
         $response = $useCase->execute(
             input: new ListCategoriesInputDTO(
-                filter: $request->get('filter'),
-                order: $request->get('order'),
-                page: (int) $request->get('page'),
-                totalPage: (int) $request->get('totalPage')
+                filter: $request->get('filter', ''),
+                order: $request->get('order', 'DESC'),
+                page: (int) $request->get('page', 1),
+                totalPage: (int) $request->get('totalPage', 15)
             )
         );
 
@@ -33,5 +36,20 @@ class CategoryController extends Controller
                 'from' => $response->from
             ]
         ]);
+    }
+
+    public function store(StoreCategoryRequest $request, CreateCategoryUseCase $useCase)
+    {
+        $response = $useCase->execute(
+            input: new CategoryCreateInputDTO(
+                name: $request->name,
+                description: $request->description ?? '',
+                isActive: (bool) $request->is_active ?? true,
+            )
+        );
+
+        return (new CategoryResource($response))
+            ->response()
+            ->setStatusCode(Response::HTTP_CREATED);
     }
 }
