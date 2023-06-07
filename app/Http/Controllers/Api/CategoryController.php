@@ -9,12 +9,14 @@ use Core\UseCase\Category\CreateCategoryUseCase;
 use Core\UseCase\Category\ListCategoriesUseCase;
 use Core\UseCase\DTO\Category\CreateCategory\CategoryCreateInputDTO;
 use Core\UseCase\DTO\Category\ListCategories\ListCategoriesInputDTO;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 use Illuminate\Http\Response;
 
 class CategoryController extends Controller
 {
-    public function index(Request $request, ListCategoriesUseCase $useCase)
+    public function index(Request $request, ListCategoriesUseCase $useCase): AnonymousResourceCollection
     {
         $response = $useCase->execute(
             input: new ListCategoriesInputDTO(
@@ -48,7 +50,7 @@ class CategoryController extends Controller
             )
         );
 
-        return (new CategoryResource($response))
+        return (new CategoryResource(\collect($response)))
             ->response()
             ->setStatusCode(Response::HTTP_CREATED);
     }
