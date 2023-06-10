@@ -7,12 +7,16 @@ use App\Http\Requests\StoreCategoryRequest;
 use App\Http\Resources\CategoryResource;
 use Core\UseCase\Category\CreateCategoryUseCase;
 use Core\UseCase\Category\ListCategoriesUseCase;
+use Core\UseCase\Category\ListCategoryUseCase;
+use Core\UseCase\DTO\Category\CategoryListInputDTO;
 use Core\UseCase\DTO\Category\CreateCategory\CategoryCreateInputDTO;
 use Core\UseCase\DTO\Category\ListCategories\ListCategoriesInputDTO;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 use Illuminate\Http\Response;
+
+use function collect;
 
 class CategoryController extends Controller
 {
@@ -40,7 +44,7 @@ class CategoryController extends Controller
         ]);
     }
 
-    public function store(StoreCategoryRequest $request, CreateCategoryUseCase $useCase)
+    public function store(StoreCategoryRequest $request, CreateCategoryUseCase $useCase): JsonResponse
     {
         $response = $useCase->execute(
             input: new CategoryCreateInputDTO(
@@ -50,8 +54,20 @@ class CategoryController extends Controller
             )
         );
 
-        return (new CategoryResource(\collect($response)))
+        return (new CategoryResource(collect($response)))
             ->response()
             ->setStatusCode(Response::HTTP_CREATED);
+    }
+
+    public function show(ListCategoryUseCase $useCase, $id): JsonResponse
+    {
+        $response = $useCase->execute(
+            input: new CategoryListInputDTO(
+                id: $id
+            )
+        );
+
+        return (new CategoryResource(collect($response)))
+            ->response();
     }
 }

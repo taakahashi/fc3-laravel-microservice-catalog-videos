@@ -20,10 +20,11 @@ class ListCategoryUseCase
         $newCategory = $this->repository->findById($input->id);
 
         return new CategoryListOutputDTO (
-            id: $newCategory->id,
+            id: $newCategory->id(),
             name: $newCategory->name,
             description: $newCategory->description,
-            is_active: $newCategory->isActive
+            is_active: $newCategory->isActive,
+            created_at: $newCategory->createdAt(),
         );
     }
 

@@ -87,6 +87,7 @@ Instalando o Mockery
     composer require --dev mockery/mockery
 
 MySQL
+
     docker-compose exec db bash
     mysql -u root -p code_micro_videos
     show tables;

@@ -1,6 +1,6 @@
 <?php
 
-namespace Unit\UseCase\Category;
+namespace Tests\Unit\UseCase\Category;
 
 use Ramsey\Uuid\Uuid;
 use stdClass;
@@ -11,7 +11,6 @@ use Core\Domain\Repository\CategoryRepositoryInterface;
 use Core\UseCase\DTO\Category\CategoryListInputDTO;
 use Core\UseCase\DTO\Category\CategoryListOutputDTO;
 use Core\UseCase\Category\ListCategoryUseCase;
-
 
 class ListCategoryUseCaseTest extends TestCase
 {
@@ -25,6 +24,9 @@ class ListCategoryUseCaseTest extends TestCase
             $uuid,
             $categoryName
         ]);
+
+        $this->mockEntity->shouldReceive('id')->andReturn($uuid);
+        $this->mockEntity->shouldReceive('createdAt')->andReturn(date('Y-m-d H:i:s'));
 
         $this->mockRepository = Mockery::mock(stdClass::class, CategoryRepositoryInterface::class);
         $this->mockRepository
@@ -55,5 +57,5 @@ class ListCategoryUseCaseTest extends TestCase
 
         Mockery::close();
     }
-    
+
 }
