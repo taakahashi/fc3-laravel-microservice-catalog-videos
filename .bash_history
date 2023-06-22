@@ -20,3 +20,4 @@ php artisan make:controller Api\\CategoryController
 php artisan make:resource CategoryResource
 php artisan make:test App\\Http\\Controllers\\Api\\CategoryControllerTest
 php artisan make:request StorageCategoryRequest
+php artisan make:request UpdateCategoryRequest

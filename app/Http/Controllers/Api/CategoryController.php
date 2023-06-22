@@ -4,13 +4,16 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreCategoryRequest;
+use App\Http\Requests\UpdateCategoryRequest;
 use App\Http\Resources\CategoryResource;
 use Core\UseCase\Category\CreateCategoryUseCase;
 use Core\UseCase\Category\ListCategoriesUseCase;
 use Core\UseCase\Category\ListCategoryUseCase;
+use Core\UseCase\Category\UpdateCategoryUseCase;
 use Core\UseCase\DTO\Category\CategoryListInputDTO;
 use Core\UseCase\DTO\Category\CreateCategory\CategoryCreateInputDTO;
 use Core\UseCase\DTO\Category\ListCategories\ListCategoriesInputDTO;
+use Core\UseCase\DTO\Category\UpdateCategory\CategoryUpdateInputDTO;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
@@ -64,6 +67,19 @@ class CategoryController extends Controller
         $response = $useCase->execute(
             input: new CategoryListInputDTO(
                 id: $id
+            )
+        );
+
+        return (new CategoryResource(collect($response)))
+            ->response();
+    }
+
+    public function update(UpdateCategoryRequest $request, UpdateCategoryUseCase $useCase, $id): JsonResponse
+    {
+        $response = $useCase->execute(
+            input: new CategoryUpdateInputDTO (
+                id: $id,
+                name: $request->name
             )
         );
 
