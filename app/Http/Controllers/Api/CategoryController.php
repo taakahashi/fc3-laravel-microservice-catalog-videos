@@ -7,6 +7,7 @@ use App\Http\Requests\StoreCategoryRequest;
 use App\Http\Requests\UpdateCategoryRequest;
 use App\Http\Resources\CategoryResource;
 use Core\UseCase\Category\CreateCategoryUseCase;
+use Core\UseCase\Category\DeleteCategoryUseCase;
 use Core\UseCase\Category\ListCategoriesUseCase;
 use Core\UseCase\Category\ListCategoryUseCase;
 use Core\UseCase\Category\UpdateCategoryUseCase;
@@ -85,5 +86,16 @@ class CategoryController extends Controller
 
         return (new CategoryResource(collect($response)))
             ->response();
+    }
+
+    public function destroy(DeleteCategoryUseCase $useCase, $id)
+    {
+        $useCase->execute(
+            input: new CategoryListInputDTO(
+                id: $id
+            )
+        );
+
+        return response()->json([], Response::HTTP_NO_CONTENT);
     }
 }

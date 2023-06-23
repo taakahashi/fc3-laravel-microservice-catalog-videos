@@ -8,7 +8,7 @@ use Core\UseCase\DTO\Category\DeleteCategory\CategoryDeleteOutputDTO;
 
 class DeleteCategoryUseCase
 {
-    protected $repository;
+    protected CategoryRepositoryInterface $repository;
 
     public function __construct(CategoryRepositoryInterface $repository)
     {
